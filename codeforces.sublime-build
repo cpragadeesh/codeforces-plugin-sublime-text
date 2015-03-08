@@ -1,3 +1,3 @@
 {
-	"cmd": ["python", "/Users/pragadeesh/Library/Application Support/Sublime Text 2/Packages/Codeforces/judge.py", "${file_path}/${file_name}", "${file_base_name}"]
+	"cmd": ["python", "${packages}/Codeforces/judge.py", "${file_base_name}", "${file_path}"]
 }
