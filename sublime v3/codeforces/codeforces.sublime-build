@@ -1,3 +1,0 @@
-{
-	"cmd": ["python", "${packages}/Codeforces/judge.py", "${file_base_name}", "${file_path}/${file_name}"]
-}
