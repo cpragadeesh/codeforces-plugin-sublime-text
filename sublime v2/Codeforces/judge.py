@@ -2,6 +2,7 @@ import subprocess
 import os
 from pageParser import *
 
+#Returns a list of test cases. Ex. ['Input', '1 2', 'Output', '3 4']
 def parse_page(contestID, problemID):
 	parser = problemPageParser()
 	source = open_page(contestID, problemID)
@@ -46,11 +47,14 @@ def build():
 	compile_result = subprocess.call(['g++', file_path, '-o', file_out])
 	return compile_result
 
+#Verifies the program against each test case.
 def verify(test_cases):
 	case, test_cases = get_next_test_case(test_cases)
 	input_case = create_input_file(case)
 	expected_output = get_next_output(case)
+	expected_output = [x.strip() for x in expected_output]
 	output = subprocess.check_output('./' + contestID + problemID + ' < input.txt', shell = True)
+	output = output.strip()
 	print 'Output: ', output
 	output_list = output.split('\n')
 	if output_list[-1] == '':
@@ -73,6 +77,7 @@ def verify(test_cases):
 		print 'Wrong Answer!'
 		return 1, test_cases, contestID, problemID
 
+#Runs the program against the test cases.
 def run(test_cases, contestID, problemID):
 
 	if len(test_cases) == 0:
@@ -87,6 +92,7 @@ def run(test_cases, contestID, problemID):
 	else:
 		return 1
 
+#Deletes input.txt file, leaving out the executable.
 def cleanup():
 	os.system('rm input.txt')
 
